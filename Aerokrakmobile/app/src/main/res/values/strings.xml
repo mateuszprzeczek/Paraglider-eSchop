@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Aerokrak mobile</string>
+
+    <string name="welcome_text">Sklep paralotniowy</string>
+    <string name="phone_nb">Numer telefonu</string>
+    <string name="password">Hasło</string>
+    <string name="name">Nazwa Użytkownika</string>
+    <string name="remember_me_checkbox">Pamiętaj mnie</string>
+    <string name="forget_password">Zapomniałem hasła</string>
+    <string name="create_account">Utwórz konto</string>
+    <string name="have_an_account">Masz już konto? Zaloguj się</string>
+    <string name="join_us">Załóż konto</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="menu_home">Strona Główna</string>
+
+    <string name="cart">Koszyk</string>
+    <string name="orders">Moje zakupy</string>
+    <string name="categories">Kategorie</string>
+    <string name="settings">Ustawienia</string>
+    <string name="logout">Wyloguj</string>
+    <string name="menu_send">Send</string>
+</resources>

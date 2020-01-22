@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "839890567789",
+    "firebase_url": "https://aerokrak-eshop.firebaseio.com",
+    "project_id": "aerokrak-eshop",
+    "storage_bucket": "aerokrak-eshop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839890567789:android:3beead87f8ffd7ff9fb564",
+        "android_client_info": {
+          "package_name": "com.pl.aerokrakmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839890567789-pin3h68igc4mh8q3i6qg77s0q167o5fk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pl.aerokrakmobile",
+            "certificate_hash": "68297e9a98aa3dcfe488ecd0e74d7b057135fe95"
+          }
+        },
+        {
+          "client_id": "839890567789-kjq1o29hm6pestt87j1ue7ans0ft0vv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5tHJNSUOAEdR919evBmE8eaqYwd6FsPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839890567789-kjq1o29hm6pestt87j1ue7ans0ft0vv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
