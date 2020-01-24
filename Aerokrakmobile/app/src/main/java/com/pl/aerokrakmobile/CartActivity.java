@@ -26,9 +26,13 @@ import com.pl.aerokrakmobile.model.Cart;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
 import com.pl.aerokrakmobile.viewHolder.CartViewHolder;
 
+import java.util.Objects;
+
 public class CartActivity extends AppCompatActivity {
 
 
+    private DatabaseReference cartListRef;
+    private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button nextProcessBtn;
     private TextView txtTotalAmount;
@@ -42,7 +46,12 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-
+        cartListRef = FirebaseDatabase.getInstance().getReference()
+                .child("Cart List");
+        recyclerView = findViewById(R.id.recycler_cart_list);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         nextProcessBtn = findViewById(R.id.next_process_btn);
         txtTotalAmount = findViewById(R.id.total_price);
@@ -54,7 +63,7 @@ public class CartActivity extends AppCompatActivity {
                 txtTotalAmount.setText(String.valueOf(totalPrice));
 
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
-                intent.putExtra("Total Price", String.valueOf(totalPrice));
+                intent.putExtra(ConfirmFinalOrderActivity.TOTAL_PRICE, String.valueOf(totalPrice));
                 startActivity(intent);
                 finish();
             }
@@ -64,13 +73,6 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        RecyclerView recyclerView = findViewById(R.id.recycler_cart_list);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference()
-                .child("Cart List");
 
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>()
                 .setQuery(cartListRef.child("User View")
@@ -80,13 +82,14 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart cart) {
+            protected void onBindViewHolder(@NonNull final CartViewHolder holder, int position, @NonNull final Cart cart) {
+                holder.txtProductName.setText(cart.getProductName());
                 holder.txtProductQuantity.setText("Ilość - " + cart.getQuantity());
                 holder.txtProductPrice.setText("Cena " + cart.getPrice() + " zł");
-                holder.txtProductName.setText(cart.getProductName());
 
-                //double oneProductTypeTotalPrice = (Double.parseDouble(cart.getPrice()).valueOf(cart.getPrice()) * Double.valueOf(cart.getQuantity()));
-                //totalPrice = totalPrice + oneProductTypeTotalPrice;
+
+                double oneProductTypeTotalPrice = (Double.valueOf(cart.getPrice()) * Double.valueOf(cart.getQuantity()));
+                totalPrice = totalPrice + oneProductTypeTotalPrice;
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -104,7 +107,7 @@ public class CartActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which == 0) {
                                     Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
-                                    intent.putExtra("product_id", cart.getProductId());
+                                    intent.putExtra(ProductDetailsActivity.PRODUCT_ID, cart.getProductId());
                                     startActivity(intent);
                                 }
                                 if (which == 1) {

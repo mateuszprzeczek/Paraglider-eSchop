@@ -13,7 +13,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
     private EditText nameEditText, phoneEditText, addressEditText, cityEditText;
     private Button confirmOrderBtn;
     private TextView txtTotalPriceDisplay;
-
+    public static final String TOTAL_PRICE = "extra.totalPrice";
     private String totalAmount;
 
     @Override
@@ -22,7 +22,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_final_order);
 
-        totalAmount = getIntent().getStringExtra("Total Price");
+        totalAmount = getIntent().getStringExtra(TOTAL_PRICE);
         Toast.makeText(this, "Total Price = " + totalAmount, Toast.LENGTH_SHORT).show();
 
 

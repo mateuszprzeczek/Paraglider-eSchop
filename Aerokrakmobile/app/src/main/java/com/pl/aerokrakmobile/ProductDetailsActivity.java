@@ -35,7 +35,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private ElegantNumberButton numberButton;
     private TextView productPrice, productDescription, productName;
-    private String productId = "product_id";
+    public static final String PRODUCT_ID = "extraId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +43,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
-        productId = getIntent().getStringExtra("product_id");
+        final String productId = getIntent().getStringExtra(PRODUCT_ID);
 
 
         addToCartBtn = findViewById(R.id.product_detail_add_to_cart_button);
@@ -61,12 +61,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                addingToCartList();
+                addingToCartList(productId);
             }
         });
     }
 
-    private void addingToCartList()
+    private void addingToCartList(final String productId)
     {
         String saveCurrentTime, saveCurrentDate;
 
@@ -81,8 +81,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
         final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("product Id", productId);
-        cartMap.put("product name", productName.getText().toString());
+        cartMap.put("product_id", productId);
+        cartMap.put("product_name", productName.getText().toString());
         cartMap.put("price", productPrice.getText().toString());
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
@@ -125,7 +125,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     {
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        productsRef.child("product Id").addValueEventListener(new ValueEventListener() {
+        productsRef.child(productId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())

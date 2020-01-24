@@ -32,6 +32,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,7 +46,6 @@ import io.paperdb.Paper;
 public class HomeActivity extends AppCompatActivity implements
                 NavigationView.OnNavigationItemSelectedListener {
 
-    private AppBarConfiguration mAppBarConfiguration;
     private DatabaseReference productsRef;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity implements
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra("product_id", products.getProduct_id());
+                                intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProduct_id());
                                 startActivity(intent);
                             }
                         });
@@ -130,8 +130,7 @@ public class HomeActivity extends AppCompatActivity implements
                     @Override
                     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout, parent, false);
-                        ProductViewHolder holder = new ProductViewHolder(view);
-                        return holder;
+                        return new ProductViewHolder(view);
                     }
                 };
         recyclerView.setAdapter(adapter);

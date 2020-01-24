@@ -18,7 +18,7 @@
             android:id="@+id/total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Price"
+            android:text="Twój Koszyk"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textAlignment="center"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryDark"
-        android:text="Next"
+        android:text="Złóż "
         android:textColor="@android:color/white"
         android:textSize="20sp"
 

@@ -1,13 +1,13 @@
 package com.pl.aerokrakmobile.model;
 
 public class Products {
-    private String product_name, description, price, image, category, product_id, date, time;
+    private String productName, description, price, image, category, product_id, date, time;
 
     public Products() {
     }
 
     public Products(String product_name, String description, String price, String image, String category, String product_id, String date, String time) {
-        this.product_name = product_name;
+        this.productName = product_name;
         this.description = description;
         this.price = price;
         this.image = image;
@@ -18,11 +18,11 @@ public class Products {
     }
 
     public String getProduct_name() {
-        return product_name;
+        return productName;
     }
 
     public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+        this.productName = product_name;
     }
 
     public String getDescription() {

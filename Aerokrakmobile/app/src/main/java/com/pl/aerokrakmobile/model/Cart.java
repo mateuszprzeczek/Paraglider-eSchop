@@ -2,33 +2,33 @@ package com.pl.aerokrakmobile.model;
 
 public class Cart {
 
-    private String productId, productName, price, quantity, discount;
+    private String product_id, product_name, price, quantity, discount;
 
     public Cart() {
     }
 
-    public Cart(String productId, String productName, String price, String quantity, String discount) {
-        this.productId = productId;
-        this.productName = productName;
+    public Cart(String product_id, String productName, String price, String quantity, String discount) {
+        this.product_id = product_id;
+        this.product_name = productName;
         this.price = price;
         this.quantity = quantity;
         this.discount = discount;
     }
 
     public String getProductId() {
-        return productId;
+        return product_id;
     }
 
     public void setProductId(String productId) {
-        this.productId = productId;
+        this.product_id = productId;
     }
 
     public String getProductName() {
-        return productName;
+        return product_name;
     }
 
     public void setProductName(String productName) {
-        this.productName = productName;
+        this.product_name = productName;
     }
 
     public String getPrice() {
