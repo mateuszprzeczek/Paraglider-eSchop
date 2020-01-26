@@ -72,6 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_image_change_btn"
         android:hint="Phone Number"
+        android:inputType="phone"
         android:padding="10dp"
         android:layout_margin="15dp" />
     <EditText
@@ -79,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/settings_phone_nb"
-        android:hint="Phone Number"
+        android:hint="Full Name"
         android:padding="10dp"
         android:layout_margin="15dp" />
     <EditText
@@ -88,7 +89,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/settings_full_name"
         android:padding="10dp"
-        android:hint="Phone Number"
+        android:inputType="textPostalAddress"
+        android:hint="Your Address"
         android:layout_margin="15dp" />
 
 

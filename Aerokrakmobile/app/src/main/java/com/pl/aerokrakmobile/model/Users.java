@@ -1,18 +1,15 @@
 package com.pl.aerokrakmobile.model;
 
 public class Users {
-    public String name, phone, password, image, address;
+    public String name;
+    public String password;
+    public String phone;
+    public String image;
+    public String address;
 
     public Users() {
     }
 
-    public Users(String name, String phone, String password, String image, String address) {
-        this.name = name;
-        this.phone = phone;
-        this.password = password;
-        this.image = image;
-        this.address = address;
-    }
 
     public String getName() {
         return name;
