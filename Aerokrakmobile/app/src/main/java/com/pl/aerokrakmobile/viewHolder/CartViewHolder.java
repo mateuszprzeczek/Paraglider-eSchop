@@ -10,15 +10,16 @@ import com.pl.aerokrakmobile.R;
 
 public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
-    public TextView txtProductName, txtProductPrice, txtProductQuantity;
+    public TextView txtProductName, txtProductPrice, txtProductQuantity, txtProductId;
     private ItemClickListener itemClickListener;
 
     public CartViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        txtProductName = itemView.findViewById(R.id.cart_product_name);
+        txtProductName = itemView.findViewById(R.id.cart_product_name1);
         txtProductPrice = itemView.findViewById(R.id.cart_product_price);
         txtProductQuantity = itemView.findViewById(R.id.cart_product_quantity);
+        txtProductId = itemView.findViewById(R.id.cart_product_id);
     }
 
     @Override

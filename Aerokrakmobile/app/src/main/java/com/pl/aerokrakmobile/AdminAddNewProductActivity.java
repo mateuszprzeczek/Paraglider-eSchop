@@ -48,7 +48,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_product);
 
-        categoryName = getIntent().getExtras().get(CATEGORY_NAME).toString();
+        categoryName = getIntent().getExtras().get("category").toString();
         productImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
@@ -132,7 +132,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calendar.getTime());
         productRandomKey = saveCurrentDate + saveCurrentTime;
 
@@ -177,15 +177,16 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     }
 
     private void saveProductInfoToDatabase() {
+        String productId1 = productRandomKey;
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("product_id", productRandomKey);
+        productMap.put("productid", productId1);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
         productMap.put("description", description);
         productMap.put("image", downloadImageUrl);
         productMap.put("category", categoryName);
         productMap.put("price", price);
-        productMap.put("product_name", productName);
+        productMap.put("productname", productName);
 
         productsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

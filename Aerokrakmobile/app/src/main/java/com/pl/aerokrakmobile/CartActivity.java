@@ -83,9 +83,10 @@ public class CartActivity extends AppCompatActivity {
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final CartViewHolder holder, int position, @NonNull final Cart cart) {
-                holder.txtProductName.setText(cart.getProductName());
+                holder.txtProductName.setText("Nazwa " + cart.getProduct_name());
                 holder.txtProductQuantity.setText("Ilość - " + cart.getQuantity());
                 holder.txtProductPrice.setText("Cena " + cart.getPrice() + " zł");
+                holder.txtProductId.setText("Id= "+cart.getProduct_id());
 
 
                 double oneProductTypeTotalPrice = (Double.valueOf(cart.getPrice()) * Double.valueOf(cart.getQuantity()));
@@ -107,14 +108,14 @@ public class CartActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which == 0) {
                                     Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
-                                    intent.putExtra(ProductDetailsActivity.PRODUCT_ID, cart.getProductId());
+                                    intent.putExtra(ProductDetailsActivity.PRODUCT_ID, cart.getProduct_id());
                                     startActivity(intent);
                                 }
                                 if (which == 1) {
                                     cartListRef.child("User View")
                                             .child(Prevalent.currentOnlineUser.getPhone())
                                             .child("Products")
-                                            .child(cart.getProductId())
+                                            .child(cart.getProduct_id())
                                             .removeValue()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -146,6 +147,13 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(CartActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 }
 

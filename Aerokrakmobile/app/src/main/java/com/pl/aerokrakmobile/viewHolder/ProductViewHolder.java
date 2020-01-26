@@ -12,7 +12,7 @@ import com.pl.aerokrakmobile.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txtProductName, txtProductDescription, productPrice;
+    public TextView txtProductName, txtProductDescription, productPrice, productId;
     public ImageView image;
     public com.pl.aerokrakmobile.viewHolder.ItemClickListener listener;
 
@@ -23,6 +23,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         txtProductName = itemView.findViewById(R.id.product_name);
         txtProductDescription = itemView.findViewById(R.id.product_description);
         productPrice = itemView.findViewById(R.id.product_price);
+        productId = itemView.findViewById(R.id.productId);
 
     }
 

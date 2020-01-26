@@ -49,6 +49,7 @@ public class HomeActivity extends AppCompatActivity implements
     private DatabaseReference productsRef;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+    FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter;
 
 
 
@@ -93,24 +94,21 @@ public class HomeActivity extends AppCompatActivity implements
         userNameTextView.setText(Prevalent.currentOnlineUser.getName());
         Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
 
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
+
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
                         .setQuery(productsRef, Products.class)
-                .build();
+                        .build();
 
-        FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options)
+        adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options)
                 {
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull final Products products) {
-                        productViewHolder.txtProductName.setText(products.getProduct_name());
+                        productViewHolder.txtProductName.setText("name="+products.getProductname());
                         productViewHolder.txtProductDescription.setText(products.getDescription());
                         productViewHolder.productPrice.setText("Cena " + products.getPrice() + "zł");
+                        productViewHolder.productId.setText("Id="+ products.getProductid());
 
                         Picasso.get().load(products.getImage()).into(productViewHolder.image);
 
@@ -118,7 +116,7 @@ public class HomeActivity extends AppCompatActivity implements
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProduct_id());
+                                intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProductid());
                                 startActivity(intent);
                             }
                         });
@@ -134,8 +132,23 @@ public class HomeActivity extends AppCompatActivity implements
                     }
                 };
         recyclerView.setAdapter(adapter);
+
+
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
         adapter.startListening();
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

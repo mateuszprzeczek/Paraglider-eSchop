@@ -38,8 +38,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public static final String PRODUCT_ID = "extraId";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
@@ -59,15 +58,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 addingToCartList(productId);
             }
         });
     }
 
-    private void addingToCartList(final String productId)
-    {
+    private void addingToCartList(final String productId) {
         String saveCurrentTime, saveCurrentDate;
 
         Calendar callForDate = Calendar.getInstance();
@@ -82,7 +79,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("product_id", productId);
-        cartMap.put("product_name", productName.getText().toString());
+        cartMap.put("product_name", productName.getText());
         cartMap.put("price", productPrice.getText().toString());
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
@@ -94,19 +91,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task)
-                    {
-                        if (task.isSuccessful())
-                        {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
                             cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone())
                                     .child("Products").child(productId)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task)
-                                        {
-                                            if (task.isSuccessful())
-                                            {
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to Cart List", Toast.LENGTH_SHORT).show();
 
                                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
@@ -116,9 +109,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                     });
                         }
                     }
-                });
+    });
+
 
     }
+
+
+
 
 
     private void getProductDetails(String productId)
@@ -132,7 +129,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 {
                     Products products = dataSnapshot.getValue(Products.class);
 
-                    productName.setText(products.getProduct_name());
+                    productName.setText(products.getProductname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(productImage);
