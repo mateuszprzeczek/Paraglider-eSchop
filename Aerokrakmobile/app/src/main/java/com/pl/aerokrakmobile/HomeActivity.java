@@ -46,6 +46,9 @@ import io.paperdb.Paper;
 public class HomeActivity extends AppCompatActivity implements
                 NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String ADMIN_EDIT = "extra.AdminEdit";
+    String type = "";
+
     private DatabaseReference productsRef;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -59,18 +62,40 @@ public class HomeActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null)
+        {
+            type = getIntent().getExtras().get(ADMIN_EDIT).toString();
+
+        }
+
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
+        fab.setVisibility(View.INVISIBLE);
+
+        if (!type.equals("Admin"))
+        {
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view)
+                {
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
+
         Paper.init(this);
 
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -79,20 +104,30 @@ public class HomeActivity extends AppCompatActivity implements
         layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
+        if (!type.equals("Admin"))
+        {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                    drawer, toolbar, R.string.navigation_drawer_open,
+                    R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+        }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
+
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.profile_image);
-        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
-        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+
+        if (type.equals(""))
+        {
+            userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+        }
 
 
 
@@ -112,16 +147,27 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Picasso.get().load(products.getImage()).into(productViewHolder.image);
 
+
                         productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProductid());
-                                startActivity(intent);
+
+                                if (type.equals("Admin"))
+                                {
+                                    Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
+                                    intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProductid());
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProductid());
+                                    startActivity(intent);
+                                }
+
+
                             }
                         });
-
-
                     }
 
                     @NonNull

@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import io.paperdb.Paper;
+
 public class AdminCategoryActivity extends AppCompatActivity {
     private ImageView paragliders, drives, harnesses, helmets;
     private ImageView parachutes, walkieTalkie, clothing, accessories;
-    private Button logoutBtn, checkOrderBtn;
+    private Button maintainProductsBtn, logoutBtn, checkOrderBtn;
 
 
     @Override
@@ -20,8 +22,18 @@ public class AdminCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
 
+        maintainProductsBtn = findViewById(R.id.admin_maintain_products_button);
         logoutBtn = findViewById(R.id.admin_logout_button);
         checkOrderBtn = findViewById(R.id.check_orders_button);
+
+        maintainProductsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminCategoryActivity.this, HomeActivity.class);
+                intent.putExtra(HomeActivity.ADMIN_EDIT, "Admin");
+                startActivity(intent);
+            }
+        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +41,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(AdminCategoryActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Paper.book().destroy();
                 Toast.makeText(AdminCategoryActivity.this, "Logout", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
@@ -75,7 +88,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "harnesses");
+                intent.putExtra(AdminAddNewProductActivity.CATEGORY_NAME, "harnesses");
                 startActivity(intent);
             }
         });
