@@ -17,8 +17,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.pl.aerokrakmobile.admin.AdminCategoryActivity;
 import com.pl.aerokrakmobile.model.Users;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
 import com.rey.material.widget.CheckBox;
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private String dbParentName = "Users";
     private CheckBox chkBoxRememberMe;
-    private TextView adminLink, notAdminLink;
+    private TextView adminLink, notAdminLink, forgetPasswordLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         inputPhoneNumber = (EditText) findViewById(R.id.login_phone_number_input);
         adminLink = (TextView) findViewById(R.id.admin_panel_link);
         notAdminLink = (TextView) findViewById(R.id.not_admin_panel_link);
+        forgetPasswordLink = findViewById(R.id.forget_password_link);
         loadingBar = new ProgressDialog(this);
         chkBoxRememberMe = (CheckBox) findViewById(R.id.remember_me_chkb);
         Paper.init(this);
@@ -71,6 +72,16 @@ public class LoginActivity extends AppCompatActivity {
                 dbParentName = "Users";
             }
         });
+        forgetPasswordLink.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra(ResetPasswordActivity.CHECK_SETTINGS, "login");
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -153,4 +164,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -1,4 +1,4 @@
-package com.pl.aerokrakmobile;
+package com.pl.aerokrakmobile.admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.AdminOrders;
 
 public class AdminOrdersActivity extends AppCompatActivity

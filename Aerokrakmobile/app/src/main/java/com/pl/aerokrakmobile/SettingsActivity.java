@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView profileImageView;
     private EditText fullNameEditText, userPhoneEditText, addressEditText;
     private TextView profileChangeTextBtn, closeTextBtn, saveButton;
+    private Button securityQuestionsBtn;
 
     private Uri imageUri;
     private String myUrl = "";
@@ -55,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
         fullNameEditText = findViewById(R.id.settings_full_name);
         userPhoneEditText = findViewById(R.id.settings_phone_nb);
         addressEditText = findViewById(R.id.settings_address);
+        securityQuestionsBtn = findViewById(R.id.settings_security_questions_btn);
         profileChangeTextBtn = findViewById(R.id.profile_image_change_btn);
         closeTextBtn = findViewById(R.id.close_settings_btn);
         saveButton = findViewById(R.id.update_account_settings_btn);
@@ -90,6 +93,17 @@ public class SettingsActivity extends AppCompatActivity {
                         .start(SettingsActivity.this);
             }
         });
+
+        securityQuestionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(SettingsActivity.this, ResetPasswordActivity.class);
+                intent.putExtra(ResetPasswordActivity.CHECK_SETTINGS, "settings");
+                startActivity(intent);
+            }
+        });
+
     }
 
 
