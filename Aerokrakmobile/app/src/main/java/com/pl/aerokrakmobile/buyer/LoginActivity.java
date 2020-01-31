@@ -1,4 +1,4 @@
-package com.pl.aerokrakmobile;
+package com.pl.aerokrakmobile.buyer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.admin.AdminCategoryActivity;
 import com.pl.aerokrakmobile.model.Users;
 import com.pl.aerokrakmobile.prevalent.Prevalent;

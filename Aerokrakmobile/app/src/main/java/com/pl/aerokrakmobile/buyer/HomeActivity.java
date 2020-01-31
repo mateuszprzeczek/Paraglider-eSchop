@@ -1,4 +1,4 @@
-package com.pl.aerokrakmobile;
+package com.pl.aerokrakmobile.buyer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.admin.AdminMaintainProductsActivity;
 import com.pl.aerokrakmobile.model.Products;
 import com.pl.aerokrakmobile.prevalent.Prevalent;

@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.pl.aerokrakmobile.HomeActivity;
-import com.pl.aerokrakmobile.MainActivity;
+import com.pl.aerokrakmobile.buyer.HomeActivity;
+import com.pl.aerokrakmobile.buyer.MainActivity;
 import com.pl.aerokrakmobile.R;
 
 import io.paperdb.Paper;

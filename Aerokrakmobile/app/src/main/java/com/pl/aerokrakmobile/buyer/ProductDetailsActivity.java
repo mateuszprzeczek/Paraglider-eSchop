@@ -1,4 +1,4 @@
-package com.pl.aerokrakmobile;
+package com.pl.aerokrakmobile.buyer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +14,12 @@ import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Products;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
 import com.squareup.picasso.Picasso;

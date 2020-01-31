@@ -1,4 +1,4 @@
-package com.pl.aerokrakmobile;
+package com.pl.aerokrakmobile.buyer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Products;
 import com.pl.aerokrakmobile.viewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
