@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pl.aerokrakmobile.R;
+import com.pl.aerokrakmobile.sellers.SellerProductCategoryActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -80,7 +81,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity
             {
                 Toast.makeText(AdminMaintainProductsActivity.this, "Product removed", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
+                Intent intent = new Intent(AdminMaintainProductsActivity.this, SellerProductCategoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -121,7 +122,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity
                     {
                         Toast.makeText(AdminMaintainProductsActivity.this, "Changes applied successfully", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
+                        Intent intent = new Intent(AdminMaintainProductsActivity.this, SellerProductCategoryActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -165,7 +166,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
+        Intent intent = new Intent(AdminMaintainProductsActivity.this, SellerProductCategoryActivity.class);
         startActivity(intent);
     }
 }

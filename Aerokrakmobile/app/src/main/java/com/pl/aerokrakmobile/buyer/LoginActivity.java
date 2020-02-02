@@ -19,7 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pl.aerokrakmobile.R;
-import com.pl.aerokrakmobile.admin.AdminCategoryActivity;
+import com.pl.aerokrakmobile.admin.AdminHomeActivity;
+import com.pl.aerokrakmobile.sellers.SellerProductCategoryActivity;
 import com.pl.aerokrakmobile.model.Users;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
 import com.rey.material.widget.CheckBox;
@@ -132,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Logged in successfully",
                                         Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
-                                Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                 startActivity(intent);
                             } if (dbParentName.equals("Users")) {
                                 Toast.makeText(LoginActivity.this, "Logged in Users successfully",

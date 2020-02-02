@@ -72,7 +72,7 @@ public class SellerRegistrationActivity extends AppCompatActivity
         final String name = sellerNameInput.getText().toString();
         final String phone = sellerPhoneInput.getText().toString();
         final String email = sellerEmailInput.getText().toString();
-        String password = sellerPasswordInput.getText().toString();
+        final String password = sellerPasswordInput.getText().toString();
         final String address = sellerAddressInput.getText().toString();
 
         if (!name.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") && !address.equals(""))
@@ -95,7 +95,8 @@ public class SellerRegistrationActivity extends AppCompatActivity
                                 String sellerId = mAuth.getCurrentUser().getUid();
 
                                 HashMap<String, Object> sellerMap = new HashMap<>();
-                                sellerMap.put("sellerId", sellerId);
+                                String sellerId2 = sellerId;
+                                sellerMap.put("sellerId", sellerId2);
                                 sellerMap.put("phone", phone);
                                 sellerMap.put("email", email);
                                 sellerMap.put("address", address);

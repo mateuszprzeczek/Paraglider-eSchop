@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity implements
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                        .setQuery(productsRef, Products.class)
+                        .setQuery(productsRef.orderByChild("productState").equalTo("Approved"), Products.class)
                         .build();
 
         adapter = new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options)

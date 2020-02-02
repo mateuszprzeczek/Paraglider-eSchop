@@ -64,6 +64,7 @@ public class SellerLoginActivity extends AppCompatActivity {
                         {
                             if (task.isSuccessful())
                             {
+                                loadingBar.dismiss();
                                 Intent intent = new Intent(SellerLoginActivity.this, SellerHomeActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);

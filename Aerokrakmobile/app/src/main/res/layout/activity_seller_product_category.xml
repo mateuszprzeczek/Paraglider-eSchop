@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AdminCategoryActivity">
+    tools:context=".sellers.SellerProductCategoryActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,7 +18,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AdminCategoryActivity">
+    tools:context=".sellers.SellerProductCategoryActivity">
 
     <TextView
         android:id="@+id/slogan_category"
@@ -285,53 +285,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/admin_maintain_products_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear4_category_layout"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/buttons"
-        android:textColor="@android:color/black"
-        android:elevation="40dp"
-        android:textStyle="bold"
-        android:text="Maintain Products"
-        android:textSize="20sp"
-        />
-
-    <Button
-        android:id="@+id/check_orders_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/admin_maintain_products_button"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:elevation="20dp"
-        android:background="@drawable/buttons"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:text="Check New Orders"
-        android:textSize="20sp"
-        />
-
-    <Button
-        android:id="@+id/admin_logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/check_orders_button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/buttons"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:text="Logout"
-        android:textSize="20sp"
-        />
 
 
 
