@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -69,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    String UserPhoneKey = Paper.book().read(Prevalent.userPhoneNumber);
-    String UserPasswordKey = Paper.book().read(Prevalent.userPasswordKey);
+    String userIdKey = Paper.book().read(Prevalent.USER_ID);
+    String userPasswordKey = Paper.book().read(Prevalent.USER_PASSWORD_KEY);
 
-        if (UserPhoneKey != "" && UserPasswordKey != "")
+        if (userIdKey != "" && userPasswordKey != "")
     {
-        if (!TextUtils.isEmpty(UserPhoneKey)  &&  !TextUtils.isEmpty(UserPasswordKey))
+        if (!TextUtils.isEmpty(userIdKey)  &&  !TextUtils.isEmpty(userPasswordKey))
         {
-            AllowAccess(UserPhoneKey, UserPasswordKey);
+            AllowUserAccess(userIdKey, userPasswordKey);
 
             loadingBar.setTitle("Already Logged in");
             loadingBar.setMessage("Please wait.....");
@@ -84,20 +87,62 @@ public class MainActivity extends AppCompatActivity {
             loadingBar.show();
         }}}
 
+    private void AllowUserAccess(String userIdKey, String userPasswordKey)
+    {
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(userIdKey, userPasswordKey)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            final DatabaseReference rootRef;
+                            rootRef = FirebaseDatabase.getInstance().getReference();
+                            rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    Users usersData = dataSnapshot.child("Users").child(mAuth.getUid()).getValue(Users.class);
+
+                                    Prevalent.currentOnlineUser = usersData;
+
+                                    loadingBar.dismiss();
+                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+
+
+                        }
+                    }
+                });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (firebaseUser != null)
-        {
-            Intent intent = new Intent(MainActivity.this, SellerHomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        }
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        if (firebaseUser.getUid() != null)
+//        {
+//            Intent intent = new Intent(MainActivity.this, SellerHomeActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//            finish();
+//        }
     }
+
 
     private void AllowAccess(final String phone, final String password)
     {

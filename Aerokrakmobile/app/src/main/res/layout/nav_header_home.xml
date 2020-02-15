@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="user name"
+        android:text="Your name"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"

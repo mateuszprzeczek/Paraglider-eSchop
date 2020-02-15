@@ -20,7 +20,7 @@ public class SellerItemViewHolder extends RecyclerView.ViewHolder implements Vie
 
         image = itemView.findViewById(R.id.product_seller_image);
         txtProductName = itemView.findViewById(R.id.seller_product_name);
-        txtProductDescription = itemView.findViewById(R.id.product_seller_description);
+      //  txtProductDescription = itemView.findViewById(R.id.product_seller_description);
         productPrice = itemView.findViewById(R.id.product_seller_price);
         productState = itemView.findViewById(R.id.seller_product_state);
 

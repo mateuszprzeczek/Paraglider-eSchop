@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".buyer.SettingsActivity">
+    android:background="@android:color/darker_gray"
+    tools:context=".buyer.ProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_settings"
@@ -46,32 +50,53 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/settings_profile_image"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:src="@drawable/profile"
-        android:layout_below="@id/app_bar_settings"
-        android:layout_marginTop="18dp"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:id="@+id/profile_image_change_btn"
+    <RelativeLayout
+        android:id="@+id/rel_above1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Profile"
-        android:layout_below="@id/settings_profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="80dp"
+        android:layout_below="@+id/app_bar_settings">
+        <LinearLayout
+            android:id="@+id/rel_inside"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/settings_profile_image"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/profile"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/profile_image_change_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Profile Image"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="26dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
 
     <EditText
-        android:id="@+id/settings_phone_nb"
+        android:id="@+id/settings_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_image_change_btn"
-        android:hint="Phone Number"
+        android:layout_below="@id/rel_above1"
+        android:hint="Enter your phone number"
         android:inputType="phone"
         android:padding="10dp"
         android:layout_margin="15dp" />
@@ -79,7 +104,7 @@
         android:id="@+id/settings_full_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/settings_phone_nb"
+        android:layout_below="@id/settings_phone_number"
         android:hint="Full Name"
         android:padding="10dp"
         android:layout_margin="15dp" />
@@ -104,6 +129,19 @@
         android:text="Set Security Questions"
         android:layout_margin="15dp" />
 
+    <Button
+        android:id="@+id/delete_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settings_security_questions_btn"
+        android:padding="10dp"
+        android:background="@drawable/buttons"
+        android:inputType="textPostalAddress"
+        android:text="Delete Account"
+        android:layout_margin="15dp" />
+
+
 
 
 </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

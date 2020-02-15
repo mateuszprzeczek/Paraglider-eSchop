@@ -78,7 +78,7 @@ public class SellerRegistrationActivity extends AppCompatActivity
         if (!name.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") && !address.equals(""))
         {
             loadingBar.setTitle("Create Seller Account");
-            loadingBar.setMessage("Please wait, while we are checking the credencial");
+            loadingBar.setMessage("Please wait, while we are checking the credentials");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 

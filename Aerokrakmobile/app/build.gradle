@@ -41,7 +41,13 @@ dependencies {
     implementation 'com.github.rey5137:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+
+    // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.1'
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'com.google.android.gms:play-services-wallet:18.0.0'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     implementation 'io.paperdb:paperdb:2.6'
     implementation 'de.hdodenhof:circleimageview:3.1.0'

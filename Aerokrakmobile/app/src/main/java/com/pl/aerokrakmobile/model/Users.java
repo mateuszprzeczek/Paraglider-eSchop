@@ -2,14 +2,17 @@ package com.pl.aerokrakmobile.model;
 
 public class Users {
     public String name;
+    public String profileName;
     public String password;
-    public String phone;
+    public String email;
     public String image;
     public String address;
+    public String phone;
+    public String fullName;
+    public String userId;
 
     public Users() {
     }
-
 
     public String getName() {
         return name;
@@ -19,12 +22,12 @@ public class Users {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getProfileName() {
+        return profileName;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
     }
 
     public String getPassword() {
@@ -33,6 +36,14 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getImage() {
@@ -49,5 +60,29 @@ public class Users {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

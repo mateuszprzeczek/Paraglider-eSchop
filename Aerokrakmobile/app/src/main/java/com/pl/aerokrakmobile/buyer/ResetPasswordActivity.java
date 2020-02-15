@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class ResetPasswordActivity extends AppCompatActivity
 {
     private TextView pageTitle, titleQuestions;
-    private EditText phoneNumber, question1, question2;
+    private EditText eMailAddress, question1, question2;
     private Button verifyBtn, sendEmailBtn;
 
     public static final String CHECK_SETTINGS = "extra.checkSettings";
@@ -42,7 +42,7 @@ public class ResetPasswordActivity extends AppCompatActivity
 
         pageTitle = findViewById(R.id.reset_password_page_view);
         titleQuestions = findViewById(R.id.title_questions);
-        phoneNumber = findViewById(R.id.find_phone_number);
+        eMailAddress = findViewById(R.id.find_email_address);
         question1 = findViewById(R.id.question_1);
         question2 = findViewById(R.id.question_2);
         verifyBtn = findViewById(R.id.verify_reset_password_Button);
@@ -56,7 +56,7 @@ public class ResetPasswordActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        phoneNumber.setVisibility(View.GONE);
+        eMailAddress.setVisibility(View.GONE);
 
         if (check.equals("settings"))
         {
@@ -74,11 +74,11 @@ public class ResetPasswordActivity extends AppCompatActivity
                 }
             });
 
-            phoneNumber.setVisibility(View.GONE);
+            eMailAddress.setVisibility(View.GONE);
         }
         else if (check.equals("login"))
         {
-            phoneNumber.setVisibility(View.VISIBLE);
+            eMailAddress.setVisibility(View.VISIBLE);
 
             verifyBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,7 +103,7 @@ public class ResetPasswordActivity extends AppCompatActivity
         {
             DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference()
                     .child("Users")
-                    .child(Prevalent.currentOnlineUser.getPhone());
+                    .child(Prevalent.currentOnlineUser.getUserId());
 
             HashMap<String, Object> userDataMap = new HashMap<>();
             userDataMap.put("answer1", answer1);
@@ -131,7 +131,7 @@ public class ResetPasswordActivity extends AppCompatActivity
     {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference()
                 .child("Users")
-                .child(Prevalent.currentOnlineUser.getPhone());
+                .child(Prevalent.currentOnlineUser.getUserId());
         dbRef.child("Security Questions").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -157,15 +157,15 @@ public class ResetPasswordActivity extends AppCompatActivity
     }
 
     private void verifyUser() {
-        final String phone = phoneNumber.getText().toString();
+        final String email = eMailAddress.getText().toString();
         final String ans1 = question1.getText().toString().toLowerCase();
         final String ans2 = question2.getText().toString().toLowerCase();
 
-        if (!phone.equals("") && !ans1.equals("") && !ans2.equals("")) {
+        if (!email.equals("") && !ans1.equals("") && !ans2.equals("")) {
 
             final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference()
                     .child("Users")
-                    .child(phone);
+                    .child(email);
 
             dbRef.addValueEventListener(new ValueEventListener() {
                 @Override

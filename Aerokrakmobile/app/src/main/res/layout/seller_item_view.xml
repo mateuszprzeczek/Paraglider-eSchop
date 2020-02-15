@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    android:layout_marginTop="20dp"
-    app:cardElevation="15dp">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginTop="10dp"
+    app:cardElevation="15dp"
+    android:background="@android:color/darker_gray">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Product Name"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary" />
 
@@ -30,15 +31,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textSize="10sp"
+            android:textColor="@android:color/black" />
 
         <ImageView
             android:id="@+id/product_seller_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
             android:layout_below="@id/seller_product_state"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:layout_marginTop="2dp" />
 
         <TextView
@@ -48,19 +49,9 @@
             android:text="Product Price"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="18dp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textSize="12sp"
+            android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/product_seller_description"
-            android:layout_below="@id/product_seller_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textAlignment="center"
-            android:text="Product Description"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimaryDark" />
 
 
 

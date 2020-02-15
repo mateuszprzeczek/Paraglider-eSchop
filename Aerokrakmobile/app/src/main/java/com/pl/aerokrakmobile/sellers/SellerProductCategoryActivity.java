@@ -1,23 +1,58 @@
 package com.pl.aerokrakmobile.sellers;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pl.aerokrakmobile.R;
+import com.pl.aerokrakmobile.buyer.MainActivity;
 
 public class SellerProductCategoryActivity extends AppCompatActivity {
     private ImageView paragliders, drives, harnesses, helmets;
     private ImageView parachutes, walkieTalkie, clothing, accessories;
+    BottomNavigationView bottomNavigationView;
+
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()){
+                        case R.id.navigation_home:
+                            Intent intent = new Intent(SellerProductCategoryActivity.this, SellerHomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return true;
+
+                        case R.id.navigation_logout:
+                            final FirebaseAuth fAuth = FirebaseAuth.getInstance();
+                            fAuth.signOut();
+                            Intent logoutIntent = new Intent(SellerProductCategoryActivity.this, MainActivity.class);
+                            logoutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(logoutIntent);
+                            finish();
+                            return true;
+                    }
+                    return false;
+                }
+            };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_product_category);
+
+        bottomNavigationView = findViewById(R.id.seller_category_nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
 
 

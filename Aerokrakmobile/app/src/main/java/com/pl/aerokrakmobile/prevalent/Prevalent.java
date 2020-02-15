@@ -5,7 +5,7 @@ import com.pl.aerokrakmobile.model.Users;
 public class Prevalent {
     public static Users currentOnlineUser;
 
-    public static final String userPhoneNumber = "userPhone";
-    public static final String userPasswordKey = "userPassword";
+    public static final String USER_ID = "userId";
+    public static final String USER_PASSWORD_KEY = "userPassword";
 
 }

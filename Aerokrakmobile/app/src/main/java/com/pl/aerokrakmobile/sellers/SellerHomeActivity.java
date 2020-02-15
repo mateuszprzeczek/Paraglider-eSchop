@@ -16,11 +16,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.admin.AdminCheckNewProductsActivity;
+import com.pl.aerokrakmobile.buyer.HomeActivity;
 import com.pl.aerokrakmobile.buyer.MainActivity;
+import com.pl.aerokrakmobile.buyer.ProductDetailsActivity;
 import com.pl.aerokrakmobile.model.Products;
 import com.pl.aerokrakmobile.viewHolder.ProductViewHolder;
 import com.pl.aerokrakmobile.viewHolder.SellerItemViewHolder;
@@ -60,7 +63,7 @@ public class SellerHomeActivity extends AppCompatActivity {
                             finish();
                             return true;
                         case R.id.navigation_logout:
-                            final FirebaseAuth fAuth = FirebaseAuth.getInstance();
+                            FirebaseAuth fAuth = FirebaseAuth.getInstance();
                             fAuth.signOut();
                             Intent logoutIntent = new Intent(SellerHomeActivity.this, MainActivity.class);
                             logoutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -85,7 +88,7 @@ public class SellerHomeActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_seller_home);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
     }
@@ -105,10 +108,15 @@ public class SellerHomeActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull SellerItemViewHolder productViewHolder, int i, @NonNull final Products products)
                     {
-                        productViewHolder.txtProductName.setText("name="+products.getProductname());
-                        productViewHolder.txtProductDescription.setText(products.getDescription());
+                        productViewHolder.txtProductName.setText(products.getProductname());
+                      //  productViewHolder.txtProductDescription.setText(products.getDescription());
                         productViewHolder.productPrice.setText("Cena " + products.getPrice() + "zł");
                         productViewHolder.productState.setText("State " + products.getProductState());
+
+                        if (products.getProductState().equals("Not Approved"))
+                        {
+                            productViewHolder.productState.setTextColor(getColor(R.color.red));
+                        }
 
                         Picasso.get().load(products.getImage()).into(productViewHolder.image);
 
@@ -120,8 +128,8 @@ public class SellerHomeActivity extends AppCompatActivity {
 
                                 CharSequence options[] = new CharSequence[]
                                         {
-                                                "Yes" ,
-                                                "No"
+                                                "Edit" ,
+                                                "Delete"
                                         };
                                 AlertDialog.Builder builder = new AlertDialog.Builder(
                                         SellerHomeActivity.this);
@@ -132,11 +140,13 @@ public class SellerHomeActivity extends AppCompatActivity {
                                     {
                                         if (which == 0)
                                         {
-                                            deleteProduct(productId);
+                                            Intent intent = new Intent(SellerHomeActivity.this, SellerMaintainProductsActivity.class);
+                                            intent.putExtra(ProductDetailsActivity.PRODUCT_ID, products.getProductid());
+                                            startActivity(intent);
                                         }
                                         if (which == 1)
                                         {
-
+                                            deleteProduct(productId);
                                         }
                                     }
                                 });
