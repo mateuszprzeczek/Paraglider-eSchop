@@ -1,9 +1,5 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -128,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @NotNull Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
@@ -183,7 +182,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             uploadTask.continueWithTask(new Continuation() {
                 @Override
-                public Object then(@NonNull Task task) throws Exception {
+                public Object then(@NotNull Task task) throws Exception {
 
                     if (!task.isSuccessful())
                     {
@@ -195,7 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
             })
             .addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
-                public void onComplete(@NonNull Task<Uri> task) {
+                public void onComplete(@NotNull Task<Uri> task) {
                     if (task.isSuccessful())
                     {
                         Uri downloadUrl = task.getResult();
@@ -236,7 +235,7 @@ public class ProfileActivity extends AppCompatActivity {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getUserId());
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     if (dataSnapshot.child("image").exists()){
                         String image = dataSnapshot.child("image").getValue().toString();
@@ -253,7 +252,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
 
             }
         });

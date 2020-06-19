@@ -1,16 +1,16 @@
 package com.pl.aerokrakmobile.sellers;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.buyer.MainActivity;
 
@@ -24,7 +24,7 @@ public class SellerProductCategoryActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                public boolean onNavigationItemSelected(@NotNull MenuItem item) {
                     switch (item.getItemId()){
                         case R.id.navigation_home:
                             Intent intent = new Intent(SellerProductCategoryActivity.this, SellerHomeActivity.class);

@@ -1,11 +1,5 @@
 package com.pl.aerokrakmobile.admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,15 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Products;
-import com.pl.aerokrakmobile.viewHolder.ItemClickListener;
 import com.pl.aerokrakmobile.viewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -60,7 +59,7 @@ public class AdminCheckNewProductsActivity extends AppCompatActivity
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options)
                 {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull final Products products)
+                    protected void onBindViewHolder(@NotNull ProductViewHolder productViewHolder, int i, @NotNull final Products products)
                     {
                         productViewHolder.txtProductName.setText("name="+products.getProductname());
                         productViewHolder.txtProductDescription.setText(products.getDescription());
@@ -102,9 +101,9 @@ public class AdminCheckNewProductsActivity extends AppCompatActivity
                         });
                     }
 
-                    @NonNull
+                    @NotNull
                     @Override
-                    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+                    public ProductViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType)
                     {
                         View view = LayoutInflater.from(parent.getContext())
                                 .inflate(R.layout.product_items_layout, parent, false);
@@ -120,7 +119,7 @@ public class AdminCheckNewProductsActivity extends AppCompatActivity
         unverifiedProductsRef.child(productId).child("productState")
                 .setValue("Approved").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task)
+            public void onComplete(@NotNull Task<Void> task)
             {
                 Toast.makeText(AdminCheckNewProductsActivity.this,
                         "Product has been Approved", Toast.LENGTH_SHORT).show();

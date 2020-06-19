@@ -1,26 +1,27 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
-import com.pl.aerokrakmobile.sellers.SellerAddNewProductActivity;
-import com.pl.aerokrakmobile.sellers.SellerHomeActivity;
-import com.pl.aerokrakmobile.sellers.SellerProductCategoryActivity;
 
 public class CategoriesActivity extends AppCompatActivity
 {
 
-    private ImageView paragliders, drives, harnesses, helmets;
-    private ImageView parachutes, walkieTalkie, clothing, accessories;
+    private ImageView drives;
+    private ImageView harnesses;
+    private ImageView helmets;
+    private ImageView parachutes;
+    private ImageView clothing;
+    private ImageView accessories;
     BottomNavigationView bottomNavigationView;
 
 
@@ -28,7 +29,7 @@ public class CategoriesActivity extends AppCompatActivity
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                public boolean onNavigationItemSelected(@NotNull MenuItem item) {
                     switch (item.getItemId()){
                         case R.id.navigation_home:
                             Intent intent = new Intent(CategoriesActivity.this, HomeActivity.class);
@@ -59,15 +60,14 @@ public class CategoriesActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
 
-
-        paragliders = (ImageView) findViewById(R.id.paragliders);
-        drives = (ImageView) findViewById(R.id.drives);
-        harnesses = (ImageView) findViewById(R.id.harnesses);
-        helmets = (ImageView) findViewById(R.id.helmets);
-        parachutes = (ImageView) findViewById(R.id.parachutes);
-        walkieTalkie = (ImageView) findViewById(R.id.walkie_talkie);
-        clothing = (ImageView) findViewById(R.id.clothing);
-        accessories = (ImageView) findViewById(R.id.accessories);
+        ImageView paragliders = findViewById(R.id.paragliders);
+        drives = findViewById(R.id.drives);
+        harnesses = findViewById(R.id.harnesses);
+        helmets = findViewById(R.id.helmets);
+        parachutes = findViewById(R.id.parachutes);
+        ImageView walkieTalkie = findViewById(R.id.walkie_talkie);
+        clothing = findViewById(R.id.clothing);
+        accessories = findViewById(R.id.accessories);
 
 
         paragliders.setOnClickListener(new View.OnClickListener() {

@@ -17,7 +17,7 @@ import io.paperdb.Paper;
 
 public class AdminHomeActivity extends AppCompatActivity
 {
-    private Button maintainProductsBtn, logoutBtn, checkOrderBtn, checkApproveProductsBtn;
+    private Button logoutBtn, checkOrderBtn, checkApproveProductsBtn;
 
 
     @Override
@@ -26,20 +26,10 @@ public class AdminHomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_admin_home);
 
 
-
-        maintainProductsBtn = findViewById(R.id.admin_maintain_products_button);
         logoutBtn = findViewById(R.id.admin_logout_button);
         checkOrderBtn = findViewById(R.id.admin_check_orders_button);
         checkApproveProductsBtn = findViewById(R.id.admin_check_approve_products_button);
 
-        maintainProductsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdminHomeActivity.this, HomeActivity.class);
-                intent.putExtra(HomeActivity.ADMIN_EDIT, "Admin");
-                startActivity(intent);
-            }
-        });
 
         checkApproveProductsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

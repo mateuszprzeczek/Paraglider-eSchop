@@ -1,11 +1,5 @@
 package com.pl.aerokrakmobile.admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +9,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.AdminOrders;
 
@@ -50,7 +50,7 @@ public class AdminOrdersActivity extends AppCompatActivity
         FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder> adapter =
                 new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int i, @NonNull final AdminOrders model)
+                    protected void onBindViewHolder(@NotNull AdminOrdersViewHolder holder, final int i, @NotNull final AdminOrders model)
                     {
                         holder.userName.setText("Name: " + model.getName());
                         holder.userPhoneNumber.setText("Phone: " + model.getPhone());
@@ -102,9 +102,9 @@ public class AdminOrdersActivity extends AppCompatActivity
                         });
                     }
 
-                    @NonNull
+                    @NotNull
                     @Override
-                    public AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    public AdminOrdersViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
                         return new AdminOrdersViewHolder(view);
                     }
@@ -120,7 +120,7 @@ public class AdminOrdersActivity extends AppCompatActivity
         public Button showOrdersBtn;
 
 
-        public AdminOrdersViewHolder(@NonNull View itemView)
+        public AdminOrdersViewHolder(@NotNull View itemView)
         {
             super(itemView);
 

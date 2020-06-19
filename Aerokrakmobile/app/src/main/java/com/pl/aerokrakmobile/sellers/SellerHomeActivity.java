@@ -10,34 +10,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
-import com.pl.aerokrakmobile.admin.AdminCheckNewProductsActivity;
-import com.pl.aerokrakmobile.buyer.HomeActivity;
 import com.pl.aerokrakmobile.buyer.MainActivity;
 import com.pl.aerokrakmobile.buyer.ProductDetailsActivity;
 import com.pl.aerokrakmobile.model.Products;
-import com.pl.aerokrakmobile.viewHolder.ProductViewHolder;
 import com.pl.aerokrakmobile.viewHolder.SellerItemViewHolder;
 import com.squareup.picasso.Picasso;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class SellerHomeActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -50,7 +42,7 @@ public class SellerHomeActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                public boolean onNavigationItemSelected(@NotNull MenuItem item) {
                     switch (item.getItemId()){
                         case R.id.navigation_home:
                             Intent intent = new Intent(SellerHomeActivity.this, SellerHomeActivity.class);
@@ -106,7 +98,7 @@ public class SellerHomeActivity extends AppCompatActivity {
                 new FirebaseRecyclerAdapter<Products, SellerItemViewHolder>(options)
                 {
                     @Override
-                    protected void onBindViewHolder(@NonNull SellerItemViewHolder productViewHolder, int i, @NonNull final Products products)
+                    protected void onBindViewHolder(@NotNull SellerItemViewHolder productViewHolder, int i, @NotNull final Products products)
                     {
                         productViewHolder.txtProductName.setText(products.getProductname());
                       //  productViewHolder.txtProductDescription.setText(products.getDescription());
@@ -155,9 +147,9 @@ public class SellerHomeActivity extends AppCompatActivity {
                         });
                     }
 
-                    @NonNull
+                    @NotNull
                     @Override
-                    public SellerItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+                    public SellerItemViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType)
                     {
                         View view = LayoutInflater.from(parent.getContext())
                                 .inflate(R.layout.seller_item_view, parent, false);
@@ -173,7 +165,7 @@ public class SellerHomeActivity extends AppCompatActivity {
         unverifiedProductsRef.child(productId)
                 .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task)
+            public void onComplete(@NotNull Task<Void> task)
             {
                 Toast.makeText(SellerHomeActivity.this,
                         "Product has been Deleted", Toast.LENGTH_SHORT).show();

@@ -1,9 +1,5 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
 
@@ -112,7 +112,7 @@ public class ResetPasswordActivity extends AppCompatActivity
             dbRef.child("Security Questions").updateChildren(userDataMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task)
+                        public void onComplete(@NotNull Task<Void> task)
                         {
                             if (task.isSuccessful())
                             {
@@ -134,7 +134,7 @@ public class ResetPasswordActivity extends AppCompatActivity
                 .child(Prevalent.currentOnlineUser.getUserId());
         dbRef.child("Security Questions").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot)
             {
                 if (dataSnapshot.exists())
                 {
@@ -149,7 +149,7 @@ public class ResetPasswordActivity extends AppCompatActivity
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
+            public void onCancelled(@NotNull DatabaseError databaseError)
             {
 
             }
@@ -169,7 +169,7 @@ public class ResetPasswordActivity extends AppCompatActivity
 
             dbRef.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
 
                         if (dataSnapshot.hasChild("Security Questions")) {
@@ -198,7 +198,7 @@ public class ResetPasswordActivity extends AppCompatActivity
                                                             .getText()
                                                             .toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
+                                                public void onComplete(@NotNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(ResetPasswordActivity.this, "Password changed", Toast.LENGTH_SHORT).show();
 
@@ -233,7 +233,7 @@ public class ResetPasswordActivity extends AppCompatActivity
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                public void onCancelled(@NotNull DatabaseError databaseError) {
 
                 }
             });

@@ -1,21 +1,18 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,11 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.admin.AdminHomeActivity;
-import com.pl.aerokrakmobile.sellers.SellerHomeActivity;
-import com.pl.aerokrakmobile.sellers.SellerLoginActivity;
-import com.pl.aerokrakmobile.sellers.SellerProductCategoryActivity;
 import com.pl.aerokrakmobile.model.Users;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
 import com.rey.material.widget.CheckBox;
@@ -44,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox chkBoxRememberMe;
     private TextView adminLink, notAdminLink, forgetPasswordLink;
     private FirebaseAuth mAuth;
+    boolean admin = false;
 
 
     @Override
@@ -66,7 +62,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser();
+                if (admin){
+                    loginAdmin();
+                }else {
+                    loginUser();
+                }
             }
         });
         adminLink.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 adminLink.setVisibility(View.INVISIBLE);
                 notAdminLink.setVisibility(View.VISIBLE);
                 dbParentName = "Admins";
-                loginAdmin();
+                admin = true;
             }
         });
         notAdminLink.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                             rootRef = FirebaseDatabase.getInstance().getReference();
                             rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                                     Users usersData = dataSnapshot.child(dbParentName).child(mAuth.getUid()).getValue(Users.class);
 
                                     Prevalent.currentOnlineUser = usersData;
@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                public void onCancelled(@NotNull DatabaseError databaseError) {
 
                                 }
                             });
@@ -165,6 +165,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         }
+                        else {
+                            loadingBar.dismiss();
+                            Toast.makeText(LoginActivity.this, "Wrong E-Mail or Password", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -172,6 +176,11 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void loginAdmin()
     {
+        loadingBar.setTitle("Login Admin");
+        loadingBar.setMessage("Please wait, while we are checking the credencial");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
         final String email = inputEmailAddress.getEditText().getText().toString();
         final String password = inputPassword.getEditText().getText().toString();
         final DatabaseReference rootRef;
@@ -179,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
 
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot)
             {
                 if (dataSnapshot.child(dbParentName).child(email).exists())
                 {
@@ -220,7 +229,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
                 Toast.makeText(LoginActivity.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });

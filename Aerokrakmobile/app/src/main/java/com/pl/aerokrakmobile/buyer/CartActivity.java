@@ -1,11 +1,5 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Cart;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
@@ -87,15 +87,15 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final CartViewHolder holder, int position, @NonNull final Cart cart) {
-                holder.txtProductName.setText("Nazwa " + cart.getProduct_name());
+            protected void onBindViewHolder(@NotNull final CartViewHolder holder, int position, @NotNull final Cart cart) {
+                holder.txtProductName.setText(cart.getProduct_name());
                 holder.txtProductQuantity.setText("Ilość - " + cart.getQuantity());
                 holder.txtProductPrice.setText("Cena " + cart.getPrice() + " zł");
-                holder.txtProductId.setText("Id= "+cart.getProduct_id());
 
 
-                double oneProductTypeTotalPrice = (Double.valueOf(cart.getPrice()) * Double.valueOf(cart.getQuantity()));
-                totalPrice = totalPrice + oneProductTypeTotalPrice;
+                Double oneProductTypeTotalPrice;
+                oneProductTypeTotalPrice = Double.valueOf(cart.getPrice()) * Double.valueOf(cart.getQuantity());
+                totalPrice += oneProductTypeTotalPrice;
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,16 +118,16 @@ public class CartActivity extends AppCompatActivity {
                                 }
                                 if (which == 1) {
                                     cartListRef.child("User View")
-                                            .child(Prevalent.currentOnlineUser.getPhone())
+                                            .child(Prevalent.currentOnlineUser.getUserId())
                                             .child("Products")
                                             .child(cart.getProduct_id())
                                             .removeValue()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
+                                                public void onComplete(@NotNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(CartActivity.this, "Item removed successfully", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(CartActivity.this, HomeActivity.class);
+                                                        Intent intent = new Intent(CartActivity.this, CartActivity.class);
                                                         startActivity(intent);
                                                     }
                                                 }
@@ -140,9 +140,9 @@ public class CartActivity extends AppCompatActivity {
                 });
             }
 
-            @NonNull
+            @NotNull
             @Override
-            public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public CartViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout
                         , parent, false);
                 CartViewHolder holder = new CartViewHolder(view);
@@ -169,7 +169,7 @@ public class CartActivity extends AppCompatActivity {
 
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
                 {
                     String shippingState = dataSnapshot.child("state").getValue().toString();
@@ -202,7 +202,7 @@ public class CartActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
 
             }
         });

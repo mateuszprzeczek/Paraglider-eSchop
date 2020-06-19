@@ -1,8 +1,5 @@
 package com.pl.aerokrakmobile.sellers;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.buyer.MainActivity;
 
@@ -86,7 +86,7 @@ public class SellerRegistrationActivity extends AppCompatActivity
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
+                        public void onComplete(@NotNull Task<AuthResult> task)
                         {
                             if (task.isSuccessful())
                             {
@@ -105,7 +105,7 @@ public class SellerRegistrationActivity extends AppCompatActivity
                                 rootRef.child("Sellers").child(sellerId).updateChildren(sellerMap)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
-                                            public void onComplete(@NonNull Task<Void> task)
+                                            public void onComplete(@NotNull Task<Void> task)
                                             {
                                                 if (task.isSuccessful())
                                                 {

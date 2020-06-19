@@ -1,8 +1,5 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,20 +9,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Users;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
-import com.pl.aerokrakmobile.sellers.SellerHomeActivity;
 import com.pl.aerokrakmobile.sellers.SellerRegistrationActivity;
 
 import io.paperdb.Paper;
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             rootRef = FirebaseDatabase.getInstance().getReference();
                             rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                                     Users usersData = dataSnapshot.child("Users").child(mAuth.getUid()).getValue(Users.class);
 
                                     Prevalent.currentOnlineUser = usersData;
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                public void onCancelled(@NotNull DatabaseError databaseError) {
 
                                 }
                             });
@@ -152,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot)
             {
                 if (dataSnapshot.child("Users").child(phone).exists())
                 {
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
 
             }
         });

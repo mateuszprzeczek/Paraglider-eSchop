@@ -1,8 +1,5 @@
 package com.pl.aerokrakmobile.buyer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Products;
 import com.pl.aerokrakmobile.prevalent.Prevalent;
@@ -107,14 +107,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NotNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getUserId())
                                     .child("Products").child(productId)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                        public void onComplete(@NotNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to Cart List", Toast.LENGTH_SHORT).show();
 
@@ -140,7 +140,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         productsRef.child(productId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
                 {
                     Products products = dataSnapshot.getValue(Products.class);
@@ -153,7 +153,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
 
             }
         });
@@ -165,7 +165,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
                 {
                     String shippingState = dataSnapshot.child("state").getValue().toString();
@@ -184,7 +184,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
 
             }
         });

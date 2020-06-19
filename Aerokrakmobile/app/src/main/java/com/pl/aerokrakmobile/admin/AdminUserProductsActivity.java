@@ -1,19 +1,19 @@
 package com.pl.aerokrakmobile.admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 import com.pl.aerokrakmobile.R;
 import com.pl.aerokrakmobile.model.Cart;
 import com.pl.aerokrakmobile.viewHolder.CartViewHolder;
@@ -58,16 +58,16 @@ public class AdminUserProductsActivity extends AppCompatActivity
 
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CartViewHolder holder, int i, @NonNull Cart cart)
+            protected void onBindViewHolder(@NotNull CartViewHolder holder, int i, @NotNull Cart cart)
             {
                 holder.txtProductName.setText("Nazwa " + cart.getProduct_name());
                 holder.txtProductQuantity.setText("Ilość - " + cart.getQuantity());
                 holder.txtProductPrice.setText("Cena " + cart.getPrice() + " zł");
             }
 
-            @NonNull
+            @NotNull
             @Override
-            public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+            public CartViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType)
             {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout
                         , parent, false);

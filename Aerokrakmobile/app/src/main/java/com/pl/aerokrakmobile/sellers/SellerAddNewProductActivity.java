@@ -1,38 +1,35 @@
 package com.pl.aerokrakmobile.sellers;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pl.aerokrakmobile.R;
-import com.pl.aerokrakmobile.buyer.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -72,7 +69,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         sellersRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    public void onDataChange(@NotNull DataSnapshot dataSnapshot)
                     {
                         if (dataSnapshot.exists())
                         {
@@ -85,7 +82,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    public void onCancelled(@NotNull DatabaseError databaseError) {
 
                     }
                 });
@@ -173,7 +170,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onFailure(@NotNull Exception e) {
                 String errMessage = e.toString();
                 Toast.makeText(SellerAddNewProductActivity.this, "Error" + errMessage, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
@@ -185,7 +182,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    public Task<Uri> then(@NotNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (!task.isSuccessful()){
                             throw task.getException();
                         }
@@ -194,7 +191,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
+                    public void onComplete(@NotNull Task<Uri> task) {
                         if (task.isSuccessful()){
                             downloadImageUrl = task.getResult().toString();
                             Toast.makeText(SellerAddNewProductActivity.this, "" +
@@ -229,7 +226,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         productsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NotNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Intent intent = new Intent(SellerAddNewProductActivity.this,
                                     SellerProductCategoryActivity.class);
